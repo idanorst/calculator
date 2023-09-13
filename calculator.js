@@ -89,8 +89,6 @@ numbers.addEventListener("click", function () {
     } else if (event.target.id === "nine") {
         resultLine.innerHTML += 9
     } else if (event.target.classList.contains("back")) {
-        /* let currentNumber = resultLine.innerHTML
-        console.log(resultLine.innerHTML) */
         let currentNumber = resultLine.innerHTML
         resultLine.innerHTML = currentNumber.slice(0, -1)
     } else if (event.target.classList.contains("clear")) {
@@ -104,7 +102,8 @@ button0.addEventListener("click", function () {
 })
 
 function division(numb1, numb2) {
-    return numb1 / numb2
+    let result = numb1 / numb2
+    return Math.round(result)
 }
 
 function multiply(numb1, numb2) {
@@ -112,7 +111,11 @@ function multiply(numb1, numb2) {
 }
 
 function subtraction(numb1, numb2) {
-    return numb1 - numb2
+    if ((numb1 - numb2) < 0) {
+        return 0
+    } else {
+        return numb1 - numb2
+    }
 }
 
 function addition(numb1, numb2) {

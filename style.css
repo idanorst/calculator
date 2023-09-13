@@ -22,8 +22,10 @@ button {
 .calculator-container {
     display: grid;
     flex-direction: column;
-    width: 350px;
-    height: 470px;
+    width: 40%;
+    min-width: 350px;
+    height: auto;
+    min-height: 470px;
     margin-top: 2rem;
 }
 
@@ -144,5 +146,11 @@ button {
 
 .operators > button:last-child {
     border-bottom: none;
+}
+
+@media screen and (min-width: 1100px) {
+    .box {
+        height: 90px;
+    }
 }
 
