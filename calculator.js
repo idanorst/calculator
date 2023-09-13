@@ -106,8 +106,9 @@ button0.addEventListener("click", function () {
 })
 
 function division(numb1, numb2) {
-    let result = numb1 / numb2
-    return Math.round(result)
+    let firstResult = numb1 / numb2
+    let result = Number(firstResult).toFixed(1)
+    return result
 }
 
 function multiply(numb1, numb2) {
