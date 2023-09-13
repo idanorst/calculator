@@ -90,7 +90,11 @@ numbers.addEventListener("click", function () {
         resultLine.innerHTML += 9
     } else if (event.target.classList.contains("back")) {
         let currentNumber = resultLine.innerHTML
-        resultLine.innerHTML = currentNumber.slice(0, -1)
+        if (currentNumber[0] === "-" && currentNumber.length <= 2) {
+            resultLine.innerHTML = null
+        } else {
+            resultLine.innerHTML = currentNumber.slice(0, -1)
+        }
     } else if (event.target.classList.contains("clear")) {
         resultLine.innerHTML = null
         resetCalculator()
