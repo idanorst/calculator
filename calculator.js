@@ -8,15 +8,17 @@ let result1, result2, result3, operation1, operation2
 let emptyResult = false
 let changedOperation = false
 
-operators.addEventListener("click", function () {
+operators.addEventListener("click", function (event) {
     emptyResult = true
 
-    if (result1 != undefined || result1 != null) {
+    if (result1 === 0 && (operation1 === "division" || operation1 === "multiply")) {
+        resultLine.innerHTML = 0
+    } else if (result1 != null) {
         if (changedOperation) {
             result2 = parseInt(resultLine.innerHTML)
         }
 
-        if (event.target.id === "equal" && (operation2 === null || operation2 === undefined)) {
+        if (event.target.id === "equal" && operation2 === null) {
             if (operation1 === "plus") {
                 resultLine.innerHTML = addition(result1, result2)
             } else if (operation1 === "minus") {
@@ -27,7 +29,7 @@ operators.addEventListener("click", function () {
                 resultLine.innerHTML = division(result1, result2)
             }
             resetCalculator()
-        } else if (operation1 && (operation2 === null || operation2 === undefined) && (event.target.id != "multiply" && event.target.id != "division")) {
+        } else if (operation1 && operation2 === null && (event.target.id != "multiply" && event.target.id != "division")) {
             if (operation1 === "plus") {
                 resultLine.innerHTML = addition(result1, result2)
             } else if (operation1 === "minus") {
@@ -52,7 +54,7 @@ operators.addEventListener("click", function () {
                 resultLine.innerHTML = addition(result1, division(result3, result2))
             }
             resetCalculator()
-        } else if (operation1 && (operation2 === null || operation2 === undefined) && (event.target.id === "multiply" || event.target.id === "division")) {
+        } else if (operation1 && operation2 === null && (event.target.id === "multiply" || event.target.id === "division")) {
             console.log("OPERATION2 REGISTERED")
             result3 = parseInt(resultLine.innerHTML)
             operation2 = event.target.id
@@ -63,11 +65,17 @@ operators.addEventListener("click", function () {
     }
     })
         
-numbers.addEventListener("click", function () {
+numbers.addEventListener("click", function (event) {
     changedOperation = true
     if (emptyResult && !event.target.classList.contains("back")) {
         resultLine.innerHTML = null
         emptyResult = false
+    }
+
+    if ((!event.target.classList.contains("zero") 
+        && !event.target.classList.contains("back")) 
+        && resultLine.innerHTML === '0') {
+        resultLine.innerHTML = null
     }
        
     if (event.target.id === "one"){
@@ -90,19 +98,21 @@ numbers.addEventListener("click", function () {
         resultLine.innerHTML += 9
     } else if (event.target.classList.contains("back")) {
         let currentNumber = resultLine.innerHTML
-        if (currentNumber[0] === "-" && currentNumber.length <= 2) {
-            resultLine.innerHTML = null
+        if ((currentNumber[0] === "-" && currentNumber.length <= 2) || currentNumber.length === 1) {
+            resultLine.innerHTML = 0
         } else {
             resultLine.innerHTML = currentNumber.slice(0, -1)
         }
     } else if (event.target.classList.contains("clear")) {
-        resultLine.innerHTML = null
+        resultLine.innerHTML = 0
         resetCalculator()
     }
 })
 
 button0.addEventListener("click", function () {
-    resultLine.innerHTML += 0
+    if (resultLine.innerHTML != '0') {
+        resultLine.innerHTML += 0
+    } 
 })
 
 function division(numb1, numb2) {
