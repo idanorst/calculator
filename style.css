@@ -28,9 +28,12 @@ a {
     flex-direction: column;
     width: 40%;
     min-width: 350px;
+    max-width: 450px;
     height: auto;
     min-height: 470px;
     margin-top: 2rem;
+    background-color: grey;
+    padding: 1rem;
 }
 
 .result {
@@ -55,6 +58,7 @@ a {
     height: 80px;
     font-size: 2rem;
     background-color: rgb(183, 182, 182);
+    border-radius: 10%;
 }
 
 .operator-box {
@@ -70,7 +74,7 @@ a {
     display: grid;
     grid-template-areas:
         "numbers operators"
-        "bottom-zero operators";
+        "bottom-zero-dot operators";
         grid-template-columns: 3fr 1fr;
     width: 100%;
 }
@@ -124,13 +128,28 @@ a {
     cursor: pointer;
 }
 
+.zero-dot {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-area: bottom-zero-dot;
+}
+
 .zero {
-    grid-area: bottom-zero;
-    border-right: var(--border);
     background-color: rgb(183, 182, 182);
+    border-right: var(--border);
 }
 
 .zero:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.dot {
+    background-color: rgb(183, 182, 182);
+    border-right: var(--border);
+}
+
+.dot:hover {
     opacity: 0.8;
     cursor: pointer;
 }
